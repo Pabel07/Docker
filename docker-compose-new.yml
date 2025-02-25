@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - backend
+    networks:
+      - mynetwork
+
+  backend:
+    image: my-backend-image
+    container_name: backend-service
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
